@@ -34,7 +34,7 @@ public class DBInstance extends SQLiteBuilder {
     }
 
     public boolean delete() {
-        return deleteDatabase(DB_PATH_EXTERNAL);
+        return deleteDatabase(DB_PATH_BC);
     }
 
     public boolean deleteRootDb(Context context) {
@@ -47,7 +47,7 @@ public class DBInstance extends SQLiteBuilder {
     }
 
     public boolean isDBExist(){
-        return isDatabaseExists(DB_PATH_EXTERNAL);
+        return isDatabaseExists(DB_PATH_BC);
     }
 
     public boolean isDBExistOnRoot(Context context){
