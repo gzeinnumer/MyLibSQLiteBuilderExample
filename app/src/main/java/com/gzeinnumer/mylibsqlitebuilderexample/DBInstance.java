@@ -19,16 +19,16 @@ public class DBInstance extends SQLiteBuilder {
     private static final String TAG = "DBInstance_";
 
     private static SQLiteDatabase sqLiteDatabase;
-    public static String DB_PATH_EXTERNAL = Environment.getExternalStorageDirectory().toString() + "/MyLibSQLiteExternal/MyLibSQLiteSimple.db";
-    public static String DB_PATH_BC = Environment.getExternalStorageDirectory().toString() + "/MyLibSQLiteBC/MyLibSQLiteSimple.db";
+    public static String DB_PATH_EXTERNAL = Environment.getExternalStorageDirectory().toString() + "/MyLibSQLiteBuilderExternal/MyLibSQLiteSimple.db";
+    public static String DB_PATH_BC = Environment.getExternalStorageDirectory().toString() + "/MyLibSQLiteBuilderBC/MyLibSQLiteSimple.db";
     public static String DB_NAME = "MyLibSQLiteSimple.db";
 
     public static SQLiteDatabase getDataBase(Context context) {
         sqLiteDatabase = SQLiteBuilder.builder(DBInstance.class, context)
                 .setDatabaseName(DB_NAME)
                 .setDatabaseVersion(1)
-//                .putDatabaseToExternal(DB_PATH_BC)
-                .loadDatabaseFromExternal(DB_PATH_EXTERNAL)
+                .putDatabaseToExternal(DB_PATH_BC)
+//                .loadDatabaseFromExternal(DB_PATH_EXTERNAL)
                 .build();
         return sqLiteDatabase;
     }
@@ -42,7 +42,7 @@ public class DBInstance extends SQLiteBuilder {
     }
 
     public boolean backUp(Context context) {
-        String BACK_UP_TO = Environment.getExternalStorageDirectory().toString() + "/MyLibSQLiteExternalBackUp";
+        String BACK_UP_TO = Environment.getExternalStorageDirectory().toString() + "/MyLibSQLiteBuilderExternalBackUp";
         return backUpDatabase(context, BACK_UP_TO, DB_NAME);
     }
 

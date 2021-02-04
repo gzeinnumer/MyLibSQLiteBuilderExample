@@ -2,15 +2,12 @@ package com.gzeinnumer.mylibsqlitebuilderexample.activity;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gzeinnumer.mylibsqlitebuilderexample.DBInstance;
 import com.gzeinnumer.mylibsqlitebuilderexample.databinding.ActivityTestBinding;
-import com.gzeinnumer.mylibsqlitebuilderexample.table.Table1;
-
-import java.util.List;
 
 public class TestActivity extends AppCompatActivity {
 
@@ -24,25 +21,29 @@ public class TestActivity extends AppCompatActivity {
         binding = ActivityTestBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        //connection to database
         SQLiteDatabase database = DBInstance.getDataBase(getApplicationContext());
 
         DBInstance dbInstance = new DBInstance();
 
+        binding.btnCreateDb.setOnClickListener(view -> {
+            DBInstance.getDataBase(getApplicationContext());
+        });
         binding.btnDeleteDb.setOnClickListener(view -> {
             boolean dbDeleted = dbInstance.delete();
-            Log.d(TAG, "onCreate_11: " + dbDeleted);
+            Toast.makeText(this, "Database Delete in folder MyLibSQLiteBuilderExternal : " + dbDeleted, Toast.LENGTH_SHORT).show();
         });
         binding.btnBackUpDb.setOnClickListener(view -> {
             boolean dbBackup = dbInstance.backUp(getApplicationContext());
-            Log.d(TAG, "onCreate_12: " + dbBackup);
+            Toast.makeText(this, "Database Backup to folder MyLibSQLiteBuilderExternalBackUp : " + dbBackup, Toast.LENGTH_SHORT).show();
         });
         binding.btnDbRoot.setOnClickListener(view -> {
             boolean isExists = dbInstance.isDBExistOnRoot(getApplicationContext());
-            Log.d(TAG, "onCreate_13: " + isExists);
+            Toast.makeText(this, "Database Created on ROOT : " + isExists, Toast.LENGTH_SHORT).show();
         });
         binding.btnDbExternal.setOnClickListener(view -> {
             boolean isExists = dbInstance.isDBExist();
-            Log.d(TAG, "onCreate_14: " + isExists);
+            Toast.makeText(this, "Database Created on MyLibSQLiteBuilderExternal : " + isExists, Toast.LENGTH_SHORT).show();
         });
     }
 }
